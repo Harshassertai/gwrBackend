@@ -1,2 +1,2 @@
-# gwrBackend
-Backend Repo for GWR
+# seedWorksBackend
+This is seedWorks Backend Repo in JS
