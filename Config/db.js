@@ -4,7 +4,7 @@ var connection = new MySql({
 	host: 'db-seedworks-production.cubaxiuycgsa.ap-south-1.rds.amazonaws.com',
 	user: 'admin',
 	password: 'seedworks123',
-    database: "seedworks",
+  database: "GWR",
   });
 
 

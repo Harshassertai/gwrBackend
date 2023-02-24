@@ -1,4 +1,6 @@
 const axios = require("axios");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const mobileusers = require("../Models/Seedworks");
 const otpGenerator = require("otp-generator");
 const crypto = require("crypto");
@@ -176,3 +178,22 @@ module.exports.VerifyOtp =  (req, res) => {
 
 	// res.status(200).json({"message":"Success"})
 };
+
+module.exports.login =(req, res) => {
+	const { email, password } = req.body;
+	const userData = db.query(`SELECT * FROM GWR.users where email='${email}'`);
+	console.log(userData[0].password)
+	const isValid = bcrypt.compareSync(password, userData[0].password)
+	console.log(isValid)
+	if (isValid) {
+		res.status(200).json({message:'Users Details',data:userData[0]})
+	} else {
+		res.status(404).json({message:'Users Details Not Found'})
+	}
+	// if (userData[0].password === password) {
+	// 	res.status(200).json({message:'Users Details',data:userData[0]})
+	// } else {
+	// 	res.status(404).json({message:'Users Details Not Found'})
+	// }
+	
+}

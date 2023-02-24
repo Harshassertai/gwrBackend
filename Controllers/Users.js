@@ -1,45 +1,19 @@
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const usersModal = require("../Models/Seedworks");
 const { successJson, errorJson } = require("../utils/response");
 var db = require('../Config/db');
 
-module.exports.createUser =  (req, res) => {
-	let userName = req.body.userName;
-	let mobileNumber = req.body.mobileNumber;
-	let state = req.body.state;
-	let city = req.body.city;
+module.exports.createUser =  async(req, res) => {
+	let name = req.body.name;
+	let email = req.body.email;
+	let password = req.body.password;
 	let access = req.body.access;
+	// const encryptedPassword = await bcrypt.hash(password, saltRounds);
+	let data = db.query(`INSERT INTO GWR.users
+  (name,email,password,access) VALUES ('${name}','${email}','${password}','${access}');`);
 
-  let data = db.query(`INSERT INTO seedworks.users
-  (city,
-  mobileNumber,
-  state,
-userName,
-access)
-  VALUES
-  ('${city}',
-   '${mobileNumber}',
-  '${state}',
-  '${userName}',
-  '${access}');
-  `);
-
-
-//   {
-//     "message": "User created",
-//     "data": {
-//         "userName": "anukul",
-//         "mobileNumber": "9822735117",
-//         "state": "Maharashtra",
-//         "city": "Mumbai",
-//         "_id": "63d8e44a80634e4b13853ae3",
-//         "__v": 0
-//     }
-// }
-		//	res.status(400).json({ message: "Error in creating User" });
-	
-
-		res.status(200).json({ message: "User created", data: data });
-
+	res.status(200).json({ message: "User created", data: data });
 };
 
 module.exports.getUsers = (req, res) => {

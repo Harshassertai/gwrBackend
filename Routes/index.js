@@ -8,7 +8,7 @@ const ExcelImport = require("./ExcelImport");
 const CountRoutes = require("./Count");
 const UsersRoutes = require("./Users");
 const PredictRoutes = require("./Predict");
-
+const dbStatsRoutes=require("../Routes/dbStats")
 
 
 Router.use("/Auth", AuthRoutes)
@@ -17,7 +17,8 @@ Router.use("/upload",MediaRoutes)
 Router.use("/import",ExcelImport)
 Router.use("/count",CountRoutes)
 Router.use("/users",UsersRoutes)
-Router.use("/predict",PredictRoutes)
+Router.use("/predict", PredictRoutes)
+Router.use("/stats",dbStatsRoutes)
 
 
 
